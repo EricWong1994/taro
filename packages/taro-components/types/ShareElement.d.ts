@@ -2,17 +2,12 @@ import { ComponentType } from 'react'
 import { StandardProps, CommonEventFunction } from './common'
 interface ShareElementProps extends StandardProps {
   /** 映射标记
-   * @supported weapp 
+   * @supported weapp
    */
   key?: string
 
   /** 映射标记
-   * @supported weapp 
-   */
-  mapkey?: string
-
-  /** 映射标记
-   * @supported alipay 
+   * @supported alipay
    */
   name?: string
 
@@ -33,6 +28,45 @@ interface ShareElementProps extends StandardProps {
    * @supported weapp, alipay
    */
   easingFunction?: string
+
+  /** 手势返回时是否进行动画
+   * @supported weapp
+   * @default false
+   */
+  transitionOnGesture?: boolean
+
+  /** 指定 push 阶段的飞跃物
+   * @supported weapp
+   * @default "to"
+   */
+  shuttleOnPush?: 'from' | 'to' | 'from' | 'to'
+
+  /** 指定 pop 阶段的飞跃物
+   * @supported weapp
+   * @default "to"
+   */
+  shuttleOnPop?: string
+
+  /** 动画插值曲线
+   * @supported weapp
+   * @default "materialRectArc"
+   */
+  rectTweenType?:
+    | 'materialRectArc'
+    | 'materialRectCenterArc'
+    | 'linear'
+    | 'elasticIn'
+    | 'elasticOut'
+    | 'elasticInOut'
+    | 'bounceIn'
+    | 'bounceOut'
+    | 'bounceInOut'
+    | 'cubic-bezier(x1,'
+
+  /** 动画帧回调
+   * @supported weapp
+   */
+  onFrame?: string
 }
 
 /** 共享元素
@@ -100,7 +134,7 @@ interface ShareElementProps extends StandardProps {
  *         {
  *           contacts.map((item, index) => (
  *             <View key={item.id} className="contact" onClick={e => showNext(e, index)}>
- *               <ShareElement duration={300} className="name" mapkey="name" transform={transformIdx === index}>
+ *               <ShareElement duration={300} className="name" key="name" transform={transformIdx === index}>
  *                 {item.name}
  *               </ShareElement>
  *               <View className="list">
@@ -127,7 +161,7 @@ interface ShareElementProps extends StandardProps {
  *       >
  *         <View className="screen screen2">
  *           <View className="contact">
- *             <ShareElement className="name" mapkey="name" duration={300} transform>
+ *             <ShareElement className="name" key="name" duration={300} transform>
  *               {contact.name}
  *             </ShareElement>
  *             <View className={`paragraph ${show ? 'enter' : ''}`}>
